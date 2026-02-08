@@ -3,133 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XENTRIX | BNB Core Platform</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>XENTRIX Dashboard</title>
 
 <style>
-/* === CSS كما هو بدون أي تعديل === */
-:root {
-  --bg:#f5f7fb;--card:#fff;--border:#e5e7eb;
-  --primary:#1652f0;--success:#00a79d;--danger:#f6465d;
-  --muted:#6b7280;--shadow:0 4px 20px rgba(0,0,0,.05)
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
 }
-*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto}
-body{margin:0;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh}
-#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center}
-.login-box{background:#fff;padding:40px;border-radius:20px;width:100%;max-width:420px;box-shadow:var(--shadow);text-align:center}
-.logo-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#764ba2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin:auto}
-.login-title{font-size:2rem;font-weight:800;color:var(--primary)}
-.input{width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);margin-bottom:15px}
-.btn{padding:15px;border:none;border-radius:10px;width:100%;font-weight:600;cursor:pointer}
-.btn-primary{background:linear-gradient(135deg,var(--primary),#764ba2);color:#fff}
-
-#app{display:none}
-.header{background:#fff;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
-.main{max-width:1100px;margin:auto;padding:30px}
-.card{background:#fff;border-radius:20px;padding:30px;box-shadow:var(--shadow)}
-.balance{font-size:3rem;font-weight:800}
-.balance span{color:var(--primary);font-size:1.4rem}
-.actions{display:flex;gap:15px;margin-top:20px}
-.btn-success{background:var(--success);color:#fff;flex:1}
-.btn-danger{background:var(--danger);color:#fff;flex:1}
-.btn-disabled{background:#9ca3af;color:#fff;flex:1;cursor:not-allowed}
-.history{margin-top:30px}
-.tx{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:15px 0}
-.tx:last-child{border:none}
-.tx-amount{font-weight:700}
-.positive{color:var(--success)}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+}
+.header{
+  background:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #e5e7eb;
+}
+.header h1{
+  margin:0;
+  font-size:20px;
+}
+.header button{
+  padding:6px 14px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:#fff;
+  cursor:pointer;
+}
+.main{
+  max-width:1100px;
+  margin:60px auto;
+  padding:0 20px;
+}
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:40px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+.balance-title{
+  font-size:18px;
+  font-weight:600;
+}
+.balance{
+  font-size:56px;
+  font-weight:800;
+  margin:10px 0 30px;
+}
+.balance span{
+  font-size:22px;
+  font-weight:700;
+  color:#1d4ed8;
+}
+.actions{
+  display:flex;
+  gap:20px;
+  margin-bottom:40px;
+}
+.action-btn{
+  flex:1;
+  padding:18px;
+  border-radius:10px;
+  border:none;
+  font-weight:600;
+  background:#9ca3af;
+  color:#fff;
+  cursor:not-allowed;
+}
+.section-title{
+  font-weight:700;
+  margin-bottom:20px;
+}
+.tx{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.tx-left strong{
+  display:block;
+}
+.tx-left small{
+  color:#6b7280;
+}
+.tx-amount{
+  color:#10b981;
+  font-weight:700;
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-box">
-    <div class="logo-icon">X</div>
-    <div class="login-title">XENTRIX</div>
-    <p style="color:var(--muted)">BNB Core Platform</p>
-
-    <input id="email" class="input" placeholder="Email">
-    <input id="password" type="password" class="input" placeholder="Password">
-
-    <button class="btn btn-primary" onclick="login()">Login</button>
-
-    <p style="margin-top:15px;color:var(--muted);font-size:.85rem">
-      Demo: ya287@xentrix.pro / Xentrix@2026
-    </p>
-  </div>
+<div class="header">
+  <h1>XENTRIX Dashboard</h1>
+  <button onclick="location.reload()">Logout</button>
 </div>
 
-<!-- APP -->
-<div id="app">
-  <div class="header">
-    <strong>XENTRIX Dashboard</strong>
-    <button onclick="logout()">Logout</button>
-  </div>
+<div class="main">
+  <div class="card">
 
-  <div class="main">
-    <div class="card">
-      <h3>BNB Platform Balance</h3>
-      <div class="balance" id="balance">2221.00 <span>BNB</span></div>
-
-      <div class="actions">
-        <button class="btn btn-disabled">Deposit Disabled</button>
-        <button class="btn btn-disabled">Withdraw Disabled</button>
-      </div>
-
-      <div class="history">
-        <h4>Recent Transactions</h4>
-        <div id="txList"></div>
-      </div>
+    <div class="balance-title">BNB Platform Balance</div>
+    <div class="balance">
+      2221.00 <span>BNB</span>
     </div>
+
+    <div class="actions">
+      <button class="action-btn">Deposit Disabled</button>
+      <button class="action-btn">Withdraw Disabled</button>
+    </div>
+
+    <div class="section-title">Recent Transactions</div>
+
+    <div class="tx">
+      <div class="tx-left">
+        <strong>Deposit</strong>
+        <small>08/02/2026 04:00 AM</small>
+      </div>
+      <div class="tx-amount">+ 2221.00 BNB</div>
+    </div>
+
   </div>
 </div>
-
-<script>
-// ===== CONFIG =====
-const EMAIL="ya287@xentrix.pro";
-const PASS="Xentrix@2026";
-let BALANCE=2221.00;
-
-// ===== SINGLE TRANSACTION ONLY =====
-const TRANSACTIONS=[{
-  type:"deposit",
-  amount:2221.00,
-  date:"08/02/2026 04:00 AM"
-}];
-
-// ===== LOGIN =====
-function login(){
-  if(email.value===EMAIL && password.value===PASS){
-    loginScreen.style.display="none";
-    app.style.display="block";
-    render();
-  } else alert("Invalid credentials");
-}
-function logout(){location.reload();}
-
-// ===== RENDER =====
-function render(){
-  balance.innerHTML=BALANCE.toFixed(2)+" <span>BNB</span>";
-  txList.innerHTML="";
-  TRANSACTIONS.forEach(tx=>{
-    txList.innerHTML+=`
-      <div class="tx">
-        <div>
-          <strong>Deposit</strong><br>
-          <small>${tx.date}</small>
-        </div>
-        <div class="tx-amount positive">+ ${tx.amount.toFixed(2)} BNB</div>
-      </div>`;
-  });
-}
-
-// ===== NO AUTO FILL =====
-window.onload=()=>email.focus();
-</script>
 
 </body>
 </html>
-
